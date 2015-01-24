@@ -7,8 +7,13 @@
                 return true;
             }else{
                 if(!$this->isLimited()){
-                    if($this->isBigFloodOfRequests())$this->limitTheIp();
-                    return false;
+                     if($this->isBigFloodOfRequests())
+                    {
+                        $this->limitTheIp();
+                        return false;
+                    }else{
+                        return true;
+                    }
                 }else{
                     if($this->isEndTimeOfLimit()) return true;
                     else{
