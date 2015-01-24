@@ -39,10 +39,6 @@
                                                     'time'=>round(microtime(true)*1000),
                                                     'status'=>$this->open
                                                     ));
-                /*$this->model->user_ip=$this->getIp();
-                $this->model->time=round(microtime(true)*1000);
-                $this->model->status=$this->open;
-                $this->model->save(false);*/
                 return true;
             }else{
                 if(!$this->isLimited())
@@ -51,8 +47,6 @@
                     $update=Yii::app()->db->createCommand()
                             ->update('users_ip',array('time'=>round(microtime(true)*1000)),'user_ip=:_ip',
                             array(':_ip'=>$this->getIp()));
-                    /*$this->userIpData->time=round(microtime(true)*1000);
-                    $this->userIpData->update(array('time'));*/
                 }
                 return false;
             }
@@ -79,9 +73,6 @@
             if($this->isLimited()){
                 $leftTime=round(microtime(true)*1000) - $this->userIpData['time'];
                 if($leftTime>$this->limitTime){
-                    //$this->userIpData->time=round(microtime(true)*1000);
-                    //$this->userIpData->status=$this->open;
-                    //$this->userIpData->update(array('time','status'));
                     $update=Yii::app()->db->createCommand()
                             ->update('users_ip',array('time'=>round(microtime(true)*1000), 'status'=>$this->open),'user_ip=:_ip',
                             array(':_ip'=>$this->getIp()));
@@ -93,8 +84,6 @@
         }
         
         public function limitTheIp(){
-            //$this->userIpData->status=$this->limited;
-            //$this->userIpData->update(array('status'));
             $update=Yii::app()->db->createCommand()
                             ->update('users_ip',array('status'=>$this->limited),'user_ip=:_ip',
                             array(':_ip'=>$this->getIp()));
